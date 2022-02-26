@@ -15,10 +15,10 @@ package frc.robot;
 public final class Constants {
 
     /*PORTS*/
-    public static final int FR_port = 3;
-    public static final int FL_port = 2;
-    public static final int BR_port = 1; 
-    public static final int BL_port = 4;
+    public static final int FR_port = 21;
+    public static final int FL_port = 11;
+    public static final int BR_port = 22; 
+    public static final int BL_port = 12;
     //public static final int FWL_port = 5;
     //public static final int FWR_port = 6;
     public static final int Shooter_port = 9;
