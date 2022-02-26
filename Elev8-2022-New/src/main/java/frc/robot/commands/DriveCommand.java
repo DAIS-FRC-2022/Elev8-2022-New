@@ -30,6 +30,27 @@ public class DriveCommand extends CommandBase {
     double yaxis = RobotContainer.getY(RobotContainer.joy1, Constants.deadband); 
     double zaxis = RobotContainer.getZ(RobotContainer.joy1, Constants.deadband); 
     // driveSubsystem.arcadeInbuilt(yaxis, zaxis);
+
+    if (yaxis >= -0.5 && yaxis <= 0.5) {
+      yaxis = yaxis * yaxis * yaxis * 3;
+    }
+    else if (yaxis >= 0.5 && yaxis <= 1) {
+      yaxis = yaxis*1.5 - 0.5;
+    }
+    else if (yaxis >= -1 && yaxis <= -0.5) {
+      yaxis = yaxis*1.5 + 0.5;
+    }
+
+    if (zaxis >= -0.5 && zaxis <= 0.5) {
+      zaxis = zaxis * zaxis * zaxis * 3;
+    }
+    else if (zaxis >= 0.5 && zaxis <= 1) {
+      zaxis = zaxis*1.5 - 0.5;
+    }
+    else if (zaxis >= -1 && zaxis <= -0.5) {
+      zaxis = zaxis*1.5 + 0.5;
+    }
+
     driveSubsystem.arcadeInbuilt(yaxis, zaxis);
   }
 
