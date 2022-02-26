@@ -19,7 +19,7 @@ public final class Constants {
     public static final int FL_port = 11;
     public static final int BR_port = 22; 
     public static final int BL_port = 12;
-    public static final int Shooter_port = 9;
+    public static final int Shooter_port = 1;
     public static final int Intake = 7;
 
 
@@ -32,21 +32,13 @@ public final class Constants {
     public static double encoderScale = 0.001425;
     public static double rightScale = 0.25;
 
-    // public static final double T = 20 * Math.pow(10, -3);
     public static final double G = 9.81;
-    //public static final double FIELD = 0.762;
 
     public static double kPTurn = 0.0085;
     public static double kPDist = 0.21;
 
-    // public static final double CAM_WIDTH = 854;
-    // public static final double MAX_RADIUS = 100;
 
     public static double navxScale = 1.1;
-    //public static double cameraScale = 0.00035;
-    //public static double radiusScale = 5.0d;
-
-    //public static double ballRadius = 54;
 
     public static double goalHt = 2.6416; //set this to the actual goal height (in metres preferably)
     public static double limelightAngle = 30d;
@@ -56,7 +48,6 @@ public final class Constants {
     public static double kDShoot = 0.001;
     // kP, kI, kD to be tuned
 
-    //public static double kHood = 1d;
     
     public static final int shootAssistButtonNum = 5;
 }

@@ -15,15 +15,11 @@ import frc.robot.RobotContainer;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  // private final WPI_TalonSRX FR;
-  // private final WPI_TalonSRX BR;
   private final CANSparkMax FR;
   private final CANSparkMax BR;
 
   private final MotorControllerGroup rightSide;
 
-  // private final WPI_TalonSRX FL;
-  // private final WPI_TalonSRX BL; 
   private final CANSparkMax FL;
   private final CANSparkMax BL;
   private final MotorControllerGroup leftSide;
@@ -32,11 +28,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-
-    // timer = new Timer();
-    // resetIntegrals();
-    // timer.reset();
-    // timer.start();
 
     FR = new CANSparkMax(Constants.FR_port, MotorType.kBrushless);
     BR = new CANSparkMax(Constants.BR_port, MotorType.kBrushless);
@@ -53,39 +44,13 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // updateDistance();
-
-    // SmartDashboard.putNumber("Displacement", this.displacement);
-    // SmartDashboard.putNumber("Velocity", this.velocity);
-    // SmartDashboard.putNumber("Acceleration", this.acceleration);
-
-    // SmartDashboard.putNumber("Enc R", RobotContainer.navx.getYaw());
-    // SmartDashboard.putNumber("Enc R", RobotContainer.encR.getDistance() * Constants.rightScale);
-    // SmartDashboard.putNumber("Enc L", RobotContainer.encL.getDistance());
     
   }
 
   public void arcadeInbuilt(double y, double z) {
-    FR.setInverted(false);
-    BR.setInverted(false);
+    rightSide.setInverted(true);
     driveTrain.arcadeDrive(y * Constants.arcadeMaxSpeed, z * Constants.arcadeMaxSpeed);
   }
-
-  // public void brakeMode() {
-  //   FL.setNeutralMode(NeutralMode.Brake);
-  //   FR.setNeutralMode(NeutralMode.Brake);
-  //   BL.setNeutralMode(NeutralMode.Brake);
-  //   BR.setNeutralMode(NeutralMode.Brake);
-
-  //   FL.setIdleMode(mode coast());
-  // }
-
-  // public void coastMode() {
-  //   FL.setIdleMode(NeutralMode.Coast);
-  //   FR.setIdleMode(NeutralMode.Coast);
-  //   BL.setIdleMode(NeutralMode.Coast);
-  //   BR.setIdleMode(NeutralMode.Coast);
-  // }
 
   public void drive(double l, double r) {
     FR.setInverted(true);
@@ -116,18 +81,6 @@ public class DriveSubsystem extends SubsystemBase {
     if (Math.abs(correction) > Constants.maxSpeed) correction = Math.signum(correction) * Constants.maxSpeed;
     drive(correction, -correction);
   }
-
-  // public void alignBall(double angleCorrection, double distanceCorrection) {
-  //   double correctionLeft = /*distanceCorrection*/ + angleCorrection;
-  //   double correctionRight =  /*distanceCorrection*/ - angleCorrection;
-
-  //   if (Math.abs(correctionLeft) < Constants.minSpeed) correctionLeft = Math.signum(correctionLeft) * Constants.minSpeed;
-  //   if (Math.abs(correctionLeft) > Constants.maxSpeed) correctionLeft = Math.signum(correctionLeft) * Constants.maxSpeed;
-  //   if (Math.abs(correctionRight) < Constants.minSpeed) correctionRight = Math.signum(correctionRight) * Constants.minSpeed;
-  //   if (Math.abs(correctionRight) > Constants.maxSpeed) correctionRight = Math.signum(correctionRight) * Constants.maxSpeed;
-
-  //   drive(correctionLeft, correctionRight);
-  // }
 
   public void swerve(double angleCorrection, double distanceCorrection) {
     double correctionLeft = distanceCorrection + angleCorrection;

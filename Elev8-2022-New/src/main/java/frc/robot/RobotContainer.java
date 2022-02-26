@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.LimelightShoot;
+import frc.robot.commands.ShooterCommand;
 import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -55,7 +56,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     JoystickButton shootAssistButton = new JoystickButton(joy1, Constants.shootAssistButtonNum);
-    shootAssistButton.whenPressed(new LimelightShoot(shooterSubsystem, driveSubsystem));
+    shootAssistButton.whenActive(new ShooterCommand(shooterSubsystem, -0.9));
+    shootAssistButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
 
   }
 
