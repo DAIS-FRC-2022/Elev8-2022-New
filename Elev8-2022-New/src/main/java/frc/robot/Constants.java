@@ -19,12 +19,8 @@ public final class Constants {
     public static final int FL_port = 11;
     public static final int BR_port = 22; 
     public static final int BL_port = 12;
-    //public static final int FWL_port = 5;
-    //public static final int FWR_port = 6;
     public static final int Shooter_port = 9;
     public static final int Intake = 7;
-    //public static final int HoodL_port = 8;
-    //public static final int HoodR_port = 10;
 
 
     public static double arcadeMaxSpeed = 0.6;
