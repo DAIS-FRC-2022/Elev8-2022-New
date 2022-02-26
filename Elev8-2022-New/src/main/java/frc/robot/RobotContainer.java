@@ -10,7 +10,10 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.LimelightShoot;
-import edu.wpi.first.wpilibj.Encoder;
+//import edu.wpi.first.wpilibj.Encoder;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxRelativeEncoder;
+
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -34,9 +37,18 @@ public class RobotContainer {
   // IO Devices
   public static Joystick joy1 = new Joystick(0);
 
-  public static Encoder encR = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-  public static Encoder encL = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
+  // public static Encoder encR = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+  // public static Encoder encL = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
+  public static RelativeEncoder FR_encoder;
+  public static RelativeEncoder BR_encoder;
+  public static RelativeEncoder FL_encoder; 
+  public static RelativeEncoder BL_encoder;
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
+
+  // public static RelativeEncoder FR_encoder;
+  // public static RelativeEncoder BR_encoder;
+  // public static RelativeEncoder FL_encoder; 
+  // public static RelativeEncoder BL_encoder;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
