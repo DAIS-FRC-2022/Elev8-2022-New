@@ -20,7 +20,7 @@ public final class Constants {
     public static final int BR_port = 22; 
     public static final int BL_port = 12;
     public static final int Shooter_port = 1;
-    public static final int Intake = 7;
+    public static final int IntakePort = 7;
 
 
     public static double arcadeMaxSpeed = 0.6;
@@ -47,7 +47,9 @@ public final class Constants {
     public static double kIShoot = 0.001;    
     public static double kDShoot = 0.001;
     // kP, kI, kD to be tuned
+    public static double wheelRadius = 1d;
 
     
     public static final int shootAssistButtonNum = 5;
+    public static final int intakeBUttonNum = 6;
 }

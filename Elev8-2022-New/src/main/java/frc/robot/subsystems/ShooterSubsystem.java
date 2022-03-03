@@ -36,15 +36,15 @@ public class ShooterSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   
-  public void shootTime(double speed, double seconds)
+  public void shootTime(double speed, double seconds, double rampupTime)
   {
     double now = Timer.getFPGATimestamp();
 
-    while (now < 0.9) {
-      if (now == 0.3) {
+    while (now < rampupTime) {
+      if (now == rampupTime/3) {
         shooterMotor.set(speed/3);
       }
-      if (now == 0.6) {
+      if (now == rampupTime/2) {
         shooterMotor.set(speed/2);
       }
     }
@@ -56,8 +56,8 @@ public class ShooterSubsystem extends SubsystemBase {
   double prevError = 0;
   public void shootPID(double speed, double seconds)
   {
-    double startTime = System.currentTimeMillis();
-    while ((startTime - System.currentTimeMillis())/1000 <= seconds)
+    double now = Timer.getFPGATimestamp();
+    while (now <= seconds)
     {
       double error = speed - shooterMotor.get();
       double derivative = error - prevError;

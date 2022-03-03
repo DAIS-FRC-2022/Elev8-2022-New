@@ -67,7 +67,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public double getAverageDistance() {
-    return (RobotContainer.encL.getDistance() + RobotContainer.encR.getDistance())/2;
+    return (RobotContainer.FR_encoder.getPosition()+RobotContainer.BR_encoder.getPosition() + RobotContainer.FL_encoder.getPosition()+RobotContainer.BL_encoder.getPosition()/2*Math.PI*2*Constants.wheelRadius);
   }
 
   public void moveByDistance(double correction) {

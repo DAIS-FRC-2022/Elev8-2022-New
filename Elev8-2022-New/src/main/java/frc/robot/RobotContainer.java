@@ -9,6 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.LimelightShoot;
 import frc.robot.commands.ShooterCommand;
 import edu.wpi.first.wpilibj.Encoder;
@@ -16,6 +17,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxRelativeEncoder;
 
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -31,6 +33,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
   // Commands
   private final DriveCommand driveCommand = new DriveCommand(driveSubsystem);
@@ -70,6 +73,9 @@ public class RobotContainer {
     JoystickButton shootAssistButton = new JoystickButton(joy1, Constants.shootAssistButtonNum);
     shootAssistButton.whenActive(new ShooterCommand(shooterSubsystem, -0.9));
     shootAssistButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
+
+    JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeBUttonNum);
+    intakeButton.whenHeld(new IntakeCommand(intakeSubsystem, 0.5));
 
   }
 

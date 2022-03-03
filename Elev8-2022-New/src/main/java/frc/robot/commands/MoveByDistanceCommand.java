@@ -13,6 +13,7 @@ public class MoveByDistanceCommand extends CommandBase {
 
   DriveSubsystem driveSubsystem;
   double setpoint, error;
+  double FRpos, BRpos, BLpos, FLpos;
 
   /** Creates a new MoveByDistanceCommand. */
   public MoveByDistanceCommand(DriveSubsystem driveSubsystem, double setpoint) {
@@ -25,8 +26,10 @@ public class MoveByDistanceCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.encR.reset();
-    RobotContainer.encL.reset();
+    // BRpos = RobotContainer.BR_encoder.getPosition();
+    // FRpos = RobotContainer.FR_encoder.getPosition();
+    // BLpos = RobotContainer.BL_encoder.getPosition();
+    // FLpos = RobotContainer.FL_encoder.getPosition();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
