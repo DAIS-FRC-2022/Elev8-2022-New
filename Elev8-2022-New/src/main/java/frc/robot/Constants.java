@@ -29,7 +29,7 @@ public final class Constants {
     public static double deadband = 0.02;
 
     // Encoders
-    public static double encoderScale = 0.001425;
+    public static double encoderScale = 1;
     public static double rightScale = 0.25;
 
     public static final double G = 9.81;
