@@ -36,7 +36,7 @@ public class ShooterSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   
-  public void shootTime(double speed, double seconds, double rampupTime)
+  public void shootTime(double speed, double rampupTime)
   {
     double now = Timer.getFPGATimestamp();
 
@@ -65,6 +65,7 @@ public class ShooterSubsystem extends SubsystemBase {
       double correction = error*Constants.kPShoot + derivative*Constants.kDShoot + integral*Constants.kIShoot;
       integral = error + integral;
       shooterMotor.set(speed + correction);
+      now = Timer.getFPGATimestamp();
     }
     shooterMotor.set(0);
   }

@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.LimelightShoot;
+import frc.robot.commands.MoveByDistanceCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.SwerveByDist;
+import frc.robot.commands.SwerveCommand;
 import edu.wpi.first.wpilibj.Encoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxRelativeEncoder;
@@ -22,6 +25,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -29,7 +33,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
@@ -43,10 +46,7 @@ public class RobotContainer {
 
   // public static Encoder encR = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
   // public static Encoder encL = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-  public static RelativeEncoder FR_encoder;
-  public static RelativeEncoder BR_encoder;
-  public static RelativeEncoder FL_encoder; 
-  public static RelativeEncoder BL_encoder;
+ 
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
 
   // public static RelativeEncoder FR_encoder;
@@ -71,11 +71,15 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     JoystickButton shootAssistButton = new JoystickButton(joy1, Constants.shootAssistButtonNum);
-    shootAssistButton.whenActive(new ShooterCommand(shooterSubsystem, -0.9));
+    shootAssistButton.whenActive(new ShooterCommand(shooterSubsystem, 0.55));
     shootAssistButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
 
     JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeBUttonNum);
-    intakeButton.whenHeld(new IntakeCommand(intakeSubsystem, 0.5));
+    intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5));
+    intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0));
+
+    JoystickButton autoButton = new JoystickButton(joy1, 4);
+    autoButton.whenPressed(new SwerveByDist(driveSubsystem, 5, 5));
 
   }
 
@@ -87,7 +91,9 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
 
-    return new LimelightShoot(shooterSubsystem, driveSubsystem);
+    //return new SwerveByDist(driveSubsystem, 1, 1);
+    //return new SwerveCommand(driveSubsystem, 90, 1);
+    return new MoveByDistanceCommand(driveSubsystem, 1);
   }
 
   public static double getY(Joystick joy, double deadband) {
