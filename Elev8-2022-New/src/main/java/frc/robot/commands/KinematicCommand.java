@@ -40,7 +40,7 @@ public class KinematicCommand extends CommandBase {
   @Override
   public void execute() {
     driveSubsystem.drive(wheelSpeeds.leftMetersPerSecond/Constants.realMaxSpeed, wheelSpeeds.rightMetersPerSecond/Constants.realMaxSpeed);
-
+    
   }
 
   // Called once the command ends or is interrupted.

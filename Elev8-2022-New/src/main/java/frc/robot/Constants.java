@@ -19,18 +19,20 @@ public final class Constants {
     public static final int FL_port = 11;
     public static final int BR_port = 22; 
     public static final int BL_port = 12;
-    public static final int Shooter_port = 1;
+    public static final int Shooter_port = 3;
     public static final int IntakePort = 2;
+    public static final int FeederPort = 1;
 
 
     public static double arcadeMaxSpeed = 0.6;
     public static double maxSpeed = 0.3;
     public static double minSpeed = 0.1;
-    public static double deadband = 0.02;
+    public static double deadband = 0.2;
 
     // Encoders
-    public static double encoderScale = 1;
+    public static double encoderScale = 0.03;
     public static double rightScale = 0.25;
+    public static double gearRatio = 7.31;
 
     public static final double G = 9.81;
 

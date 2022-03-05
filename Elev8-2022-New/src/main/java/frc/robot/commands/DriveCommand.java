@@ -51,7 +51,7 @@ public class DriveCommand extends CommandBase {
       zaxis = zaxis*1.5 + 0.5;
     }
 
-    driveSubsystem.arcadeInbuilt(yaxis, zaxis);
+    driveSubsystem.arcadeInbuilt(zaxis, yaxis);
   }
 
   // Called once the command ends or is interrupted.

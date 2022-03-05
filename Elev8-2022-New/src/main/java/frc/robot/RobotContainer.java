@@ -75,11 +75,15 @@ public class RobotContainer {
     shootAssistButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
 
     JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeBUttonNum);
-    intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5));
-    intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0));
+    intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5, 0));
+    intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0, 0));
 
     JoystickButton autoButton = new JoystickButton(joy1, 4);
     autoButton.whenPressed(new SwerveByDist(driveSubsystem, 5, 5));
+
+    JoystickButton feederButton = new JoystickButton(joy1, 3);
+    feederButton.whenActive(new IntakeCommand(intakeSubsystem, 0, -0.5));
+    feederButton.whenReleased(new IntakeCommand(intakeSubsystem, 0, 0));
 
   }
 

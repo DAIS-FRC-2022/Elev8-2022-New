@@ -10,11 +10,12 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class IntakeCommand extends CommandBase {
   /** Creates a new IntakeCommand. */
   IntakeSubsystem intakeSubsystem;
-  double pow;
-  public IntakeCommand(IntakeSubsystem intakeSubsystem, double pow) {
+  double Ipow, Fpow;
+  public IntakeCommand(IntakeSubsystem intakeSubsystem, double Ipow, double Fpow) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intakeSubsystem = intakeSubsystem;
-    this.pow = pow;
+    this.Ipow = Ipow;
+    this.Fpow = Fpow;
     addRequirements(intakeSubsystem);
   }
 
@@ -25,7 +26,7 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSubsystem.intake(pow);
+    intakeSubsystem.intake(Ipow, Fpow);
   }
 
   // Called once the command ends or is interrupted.

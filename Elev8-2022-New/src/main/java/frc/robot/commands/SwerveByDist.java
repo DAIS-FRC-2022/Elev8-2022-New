@@ -22,6 +22,6 @@ public class SwerveByDist extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     double dist = Math.PI * Math.sqrt(2) * Math.pow(x, 2) * Math.pow(y, 2);
-    addCommands(new SwerveCommand(driveSubsystem, Math.toDegrees(Math.atan(y/x)), dist));
+    addCommands(new SwerveCommand(driveSubsystem, Math.toDegrees(Math.atan(y/x))*2, dist));
   }
 }
