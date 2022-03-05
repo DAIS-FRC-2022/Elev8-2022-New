@@ -43,6 +43,6 @@ public class MoveByAngleCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(this.error) <= Math.max(1.00d, (this.setpoint * Constants.deadband)));
+    return (Math.abs(this.error) <= Math.max(1.00d, (this.setpoint * 0.03)));
   }
 }

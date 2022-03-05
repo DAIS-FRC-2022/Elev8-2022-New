@@ -55,6 +55,6 @@ public class SwerveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(this.angleError) <= Math.max(1.00d, (this.desiredAngle * Constants.deadband))) && (Math.abs(this.distanceError) <= Math.max(1.00d, (this.desiredDistance * Constants.deadband)));
+    return (Math.abs(this.angleError) <= Math.max(1.00d, (this.desiredAngle * 0.03))) && (Math.abs(this.distanceError) <= Math.max(1.00d, (this.desiredDistance * Constants.deadband)));
   }
 }
