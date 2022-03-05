@@ -31,10 +31,10 @@ public class MoveByDistanceCommand extends CommandBase {
     // FRpos = RobotContainer.FR_encoder.getPosition();
     // BLpos = RobotContainer.BL_encoder.getPosition();
     // FLpos = RobotContainer.FL_encoder.getPosition();
-    driveSubsystem.FL_encoder.setPosition(0);
-    driveSubsystem.FR_encoder.setPosition(0);
-    driveSubsystem.BR_encoder.setPosition(0);
-    driveSubsystem.BL_encoder.setPosition(0);
+    DriveSubsystem.FL_encoder.setPosition(0);
+    DriveSubsystem.FR_encoder.setPosition(0);
+    DriveSubsystem.BR_encoder.setPosition(0);
+    DriveSubsystem.BL_encoder.setPosition(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

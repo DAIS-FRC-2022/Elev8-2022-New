@@ -28,6 +28,10 @@ public class SwerveCommand extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.navx.reset();
+    DriveSubsystem.FL_encoder.setPosition(0);
+    DriveSubsystem.FR_encoder.setPosition(0);
+    DriveSubsystem.BR_encoder.setPosition(0);
+    DriveSubsystem.BL_encoder.setPosition(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -5,8 +5,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 
@@ -14,6 +18,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /** Creates a new ShooterSubsystem. */
   private final CANSparkMax shooterMotor;
+  private final SparkMaxPIDController shootPIDController;
+  public static RelativeEncoder shootEncoder;
 
 
   public ShooterSubsystem() {
@@ -23,7 +29,16 @@ public class ShooterSubsystem extends SubsystemBase {
     //FWR = new WPI_TalonSRX(Constants.FWR_port);
     //flyWheel = new MotorControllerGroup(FWL, FWR);
     shooterMotor = new CANSparkMax(Constants.Shooter_port, MotorType.kBrushless); //Have to check whether its brushless or brushed
+    this.shooterMotor.restoreFactoryDefaults();
+    this.shootPIDController = this.shooterMotor.getPIDController();
+    ShooterSubsystem.shootEncoder = this.shooterMotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
+    this.shootPIDController.setP(0.00012);
+    this.shootPIDController.setI(3e-8);
+    this.shootPIDController.setD(1.2);
+    this.shootPIDController.setIZone(0);
+    this.shootPIDController.setFF(0.00017);
+    this.shootPIDController.setOutputRange(-1, 1);
     //HoodL = new Servo(Constants.HoodL_port);
     //HoodR = new Servo(Constants.HoodR_port);
     //Hood = new MotorControllerGroup(HoodL, HoodR);
@@ -74,6 +89,17 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.set(speed);
   }
 
+  public void shootProp(double pow)
+  {
+    double speedmotor = shootEncoder.getVelocity();
+    if (Math.abs(speedmotor) < 1500) {
+      this.shootPIDController.setReference(pow*6000, CANSparkMax.ControlType.kVelocity);
+      // SmartDashboard.putNumber("POSITION",
+      // ShooterSubsystem.shootEncoder.getPosition());
+      SmartDashboard.putNumber("VELOCITY", ShooterSubsystem.shootEncoder.getPosition());
+    } else
+      this.shooterMotor.set(0);
+  }
   /*public void setHood (double angle)
   {
     HoodL.setAngle(angle);

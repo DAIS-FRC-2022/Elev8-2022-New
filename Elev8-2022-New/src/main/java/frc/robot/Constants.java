@@ -25,7 +25,7 @@ public final class Constants {
 
 
     public static double arcadeMaxSpeed = 0.6;
-    public static double maxSpeed = 0.3;
+    public static double maxSpeed = 0.2;
     public static double minSpeed = 0.1;
     public static double deadband = 0.2;
 
@@ -36,7 +36,7 @@ public final class Constants {
 
     public static final double G = 9.81;
 
-    public static double kPTurn = 0.0085;
+    public static double kPTurn = 0.035;
     public static double kPDist = 0.21;
 
     public static double wheel2wheelDist = 23.75;

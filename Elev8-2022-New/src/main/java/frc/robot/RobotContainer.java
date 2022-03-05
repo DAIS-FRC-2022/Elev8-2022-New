@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.LimelightShoot;
+import frc.robot.commands.MoveByAngleCommand;
 import frc.robot.commands.MoveByDistanceCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveByDist;
@@ -75,7 +76,7 @@ public class RobotContainer {
     shootAssistButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
 
     JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeBUttonNum);
-    intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5, 0));
+    intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5, -0.9));
     intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0, 0));
 
     JoystickButton autoButton = new JoystickButton(joy1, 4);
@@ -97,7 +98,8 @@ public class RobotContainer {
 
     //return new SwerveByDist(driveSubsystem, 1, 1);
     //return new SwerveCommand(driveSubsystem, 90, 1);
-    return new MoveByDistanceCommand(driveSubsystem, 1);
+    //return new MoveByDistanceCommand(driveSubsystem, 1);
+    return new MoveByAngleCommand(driveSubsystem, 90);
   }
 
   public static double getY(Joystick joy, double deadband) {
