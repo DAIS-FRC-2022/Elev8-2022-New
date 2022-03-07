@@ -36,8 +36,7 @@ public class ShooterSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   
-  public void shootTime(double speed, double rampupTime)
-  {
+  public void shootTime(double speed, double rampupTime) {
     double now = Timer.getFPGATimestamp();
 
     while (now < rampupTime) {
@@ -54,30 +53,20 @@ public class ShooterSubsystem extends SubsystemBase {
 
   double integral = 0;
   double prevError = 0;
-  public void shootPID(double speed, double seconds)
-  {
-    double now = Timer.getFPGATimestamp();
-    while (now <= seconds)
-    {
-      double error = speed - shooterMotor.get();
-      double derivative = error - prevError;
-      prevError = error;
-      double correction = error*Constants.kPShoot + derivative*Constants.kDShoot + integral*Constants.kIShoot;
-      integral = error + integral;
-      shooterMotor.set(speed + correction);
-      now = Timer.getFPGATimestamp();
-    }
-    shooterMotor.set(0);
+  public void shootPID(double speed) {
+    double error = speed - shooterMotor.get();
+
+    double derivative = error - prevError;
+    prevError = error;
+
+    integral = error + integral;
+    
+    double correction = error*Constants.kPShoot + derivative*Constants.kDShoot + integral*Constants.kIShoot;
+    shooterMotor.set(speed + correction);
   }
 
   public void shootRaw(double speed) {
     shooterMotor.set(speed);
   }
-
-  /*public void setHood (double angle)
-  {
-    HoodL.setAngle(angle);
-    HoodR.setAngle(angle);
-  }*/
 
 }

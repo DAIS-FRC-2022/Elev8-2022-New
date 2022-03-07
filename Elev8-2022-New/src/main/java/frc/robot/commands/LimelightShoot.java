@@ -24,7 +24,10 @@ public class LimelightShoot extends SequentialCommandGroup {
     addCommands(new GoalSeekingCommand(driveSubsystem));
     addCommands(new GoalAligningCommand(driveSubsystem, shooterSubsystem));
     //shooterSubsystem.setHood(ty*Constants.kHood);
-    shooterSubsystem.shootPID(power, 2d); //will have to change seconds depending on how long it takes to shoot
+
+
+    // idk what this is
+    // shooterSubsystem.shootPID(power, 2d); //will have to change seconds depending on how long it takes to shoot
     
 
 
