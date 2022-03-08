@@ -19,7 +19,7 @@ public final class Constants {
     public static final int FL_port = 11;
     public static final int BR_port = 22; 
     public static final int BL_port = 12;
-    public static final int Shooter_port = 3;
+    public static final int Shooter_port =53;
     public static final int IntakePort = 2;
     public static final int FeederPort = 1;
 
@@ -47,9 +47,9 @@ public final class Constants {
     public static double goalHt = 2.6416; //set this to the actual goal height (in metres preferably)
     public static double limelightAngle = 30d;
     public static double ShotConstant = 0.001;
-    public static double kPShoot = 0.001;
-    public static double kIShoot = 0.001;    
-    public static double kDShoot = 0.001;
+    public static double kPShoot = 0.01;
+    public static double kIShoot = 0;    
+    public static double kDShoot = 1;
     // kP, kI, kD to be tuned
     public static double wheelDia = 0.152d;
     public static double rpm = 93.37;
