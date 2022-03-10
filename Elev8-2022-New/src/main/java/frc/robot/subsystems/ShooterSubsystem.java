@@ -14,7 +14,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /** Creates a new ShooterSubsystem. */
   private final CANSparkMax shooterMotor;
-
+  private final CANSparkMax feederMotor;
 
   public ShooterSubsystem() {
 
@@ -22,8 +22,8 @@ public class ShooterSubsystem extends SubsystemBase {
     //FWL = new WPI_TalonSRX(Constants.FWL_port);
     //FWR = new WPI_TalonSRX(Constants.FWR_port);
     //flyWheel = new MotorControllerGroup(FWL, FWR);
-    shooterMotor = new CANSparkMax(Constants.Shooter_port, MotorType.kBrushless); //Have to check whether its brushless or brushed
-
+    shooterMotor = new CANSparkMax(Constants.ShooterPort, MotorType.kBrushless); //Have to check whether its brushless or brushed
+    feederMotor = new CANSparkMax(Constants.FeederPort, MotorType.kBrushless);
     //HoodL = new Servo(Constants.HoodL_port);
     //HoodR = new Servo(Constants.HoodR_port);
     //Hood = new MotorControllerGroup(HoodL, HoodR);
@@ -53,8 +53,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   double integral = 0;
   double prevError = 0;
-  public void shootPID(double speed) {
-    double error = speed - shooterMotor.get();
+  public void shootPID(double sSpeed, double fSpeed) {
+    double error = sSpeed - shooterMotor.get();
 
     double derivative = error - prevError;
     prevError = error;
@@ -62,7 +62,9 @@ public class ShooterSubsystem extends SubsystemBase {
     integral = error + integral;
     
     double correction = error*Constants.kPShoot + derivative*Constants.kDShoot + integral*Constants.kIShoot;
-    shooterMotor.set(speed + correction);
+    shooterMotor.set(sSpeed + correction);
+
+    feederMotor.set(fSpeed);
   }
 
   public void shootRaw(double speed) {

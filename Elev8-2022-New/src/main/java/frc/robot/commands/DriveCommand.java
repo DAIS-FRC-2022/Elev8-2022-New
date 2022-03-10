@@ -28,8 +28,7 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
     double yaxis = RobotContainer.getY(RobotContainer.joy1, Constants.deadband); 
-    double zaxis = RobotContainer.getZ(RobotContainer.joy1, Constants.deadband); 
-    // driveSubsystem.arcadeInbuilt(yaxis, zaxis);
+    double xaxis = RobotContainer.getX(RobotContainer.joy1, Constants.deadband); 
 
     if (yaxis >= -0.5 && yaxis <= 0.5) {
       yaxis = yaxis * yaxis * yaxis * 3;
@@ -41,17 +40,17 @@ public class DriveCommand extends CommandBase {
       yaxis = yaxis*1.5 + 0.5;
     }
 
-    if (zaxis >= -0.5 && zaxis <= 0.5) {
-      zaxis = zaxis * zaxis * zaxis * 3;
+    if (xaxis >= -0.5 && xaxis <= 0.5) {
+      xaxis = xaxis * xaxis * xaxis * 3;
     }
-    else if (zaxis >= 0.5 && zaxis <= 1) {
-      zaxis = zaxis*1.5 - 0.5;
+    else if (xaxis >= 0.5 && xaxis <= 1) {
+      xaxis = xaxis*1.5 - 0.5;
     }
-    else if (zaxis >= -1 && zaxis <= -0.5) {
-      zaxis = zaxis*1.5 + 0.5;
+    else if (xaxis >= -1 && xaxis <= -0.5) {
+      xaxis = xaxis*1.5 + 0.5;
     }
 
-    driveSubsystem.arcadeInbuilt(zaxis, yaxis);
+    driveSubsystem.arcadeInbuilt(yaxis, xaxis);
   }
 
   // Called once the command ends or is interrupted.

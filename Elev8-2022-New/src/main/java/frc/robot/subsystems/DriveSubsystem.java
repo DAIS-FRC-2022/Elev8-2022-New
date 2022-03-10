@@ -82,9 +82,9 @@ public class DriveSubsystem extends SubsystemBase {
     
   }
 
-  public void arcadeInbuilt(double y, double z) {
+  public void arcadeInbuilt(double y, double x) {
     rightSide.setInverted(true);
-    driveTrain.arcadeDrive(y * Constants.arcadeMaxSpeed, z * Constants.arcadeMaxSpeed);
+    driveTrain.arcadeDrive(y * Constants.arcadeMaxSpeed, x * Constants.arcadeMaxSpeed);
   }
 
   public void drive(double l, double r) {

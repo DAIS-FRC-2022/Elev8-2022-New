@@ -70,20 +70,20 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton shootAssistButton = new JoystickButton(joy1, Constants.shootAssistButtonNum);
-    shootAssistButton.whenActive(new ShooterCommand(shooterSubsystem, 0.55));
-    shootAssistButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
+    JoystickButton shooterButton = new JoystickButton(joy1, Constants.shootButtonNum);
+    shooterButton.whenActive(new ShooterCommand(shooterSubsystem, 0, 0.5));
+    shooterButton.whenReleased(new ShooterCommand(shooterSubsystem, 0, 0 ));
 
-    JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeBUttonNum);
-    intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5, 0));
-    intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0, 0));
+    JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeButtonNum);
+    intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5));
+    intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0));
 
-    JoystickButton autoButton = new JoystickButton(joy1, 4);
-    autoButton.whenPressed(new SwerveByDist(driveSubsystem, 5, 5));
+    // JoystickButton autoButton = new JoystickButton(joy1, 4);
+    // autoButton.whenPressed(new SwerveByDist(driveSubsystem, 5, 5));
 
-    JoystickButton feederButton = new JoystickButton(joy1, 3);
-    feederButton.whenActive(new IntakeCommand(intakeSubsystem, 0, -0.5));
-    feederButton.whenReleased(new IntakeCommand(intakeSubsystem, 0, 0));
+    // JoystickButton feederButton = new JoystickButton(joy1, Constants.feederButtonNum);
+    // feederButton.whenActive(new IntakeCommand(intakeSubsystem, 0, -0.5));
+    // feederButton.whenReleased(new IntakeCommand(intakeSubsystem, 0, 0));
 
   }
 
@@ -106,8 +106,8 @@ public class RobotContainer {
     return value;
   }
 
-  public static double getZ(Joystick joy, double deadband) {
-    double value = joy.getZ();
+  public static double getX(Joystick joy, double deadband) {
+    double value = joy.getX();
     if (Math.abs(value) < deadband) return 0;
     return value;
   }

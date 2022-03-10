@@ -12,12 +12,12 @@ import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-  private final CANSparkMax Intake;
-  private final CANSparkMax Feeder;
+  private final CANSparkMax intakeMotor;
+  
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
-    Intake = new CANSparkMax(Constants.IntakePort, MotorType.kBrushless);
-    Feeder = new CANSparkMax(Constants.FeederPort, MotorType.kBrushed);
+    intakeMotor = new CANSparkMax(Constants.IntakePort, MotorType.kBrushless);
+    
   }
 
   @Override
@@ -25,9 +25,8 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void intake(double Ispeed, double Fspeed)
+  public void intake(double iSpeed)
   {
-    Intake.set(Ispeed);
-    Feeder.set(Fspeed);
+    intakeMotor.set(iSpeed);
   }
 }

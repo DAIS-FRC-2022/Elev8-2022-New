@@ -19,12 +19,12 @@ public final class Constants {
     public static final int FL_port = 11;
     public static final int BR_port = 22; 
     public static final int BL_port = 12;
-    public static final int Shooter_port =53;
+    public static final int ShooterPort = 5;
     public static final int IntakePort = 2;
     public static final int FeederPort = 1;
 
 
-    public static double arcadeMaxSpeed = 0.6;
+    public static double arcadeMaxSpeed = 0.5;
     public static double maxSpeed = 0.3;
     public static double minSpeed = 0.1;
     public static double deadband = 0.2;
@@ -57,6 +57,7 @@ public final class Constants {
     public static double Tperiod = 1d;
 
     
-    public static final int shootAssistButtonNum = 5;
-    public static final int intakeBUttonNum = 6;
+    public static final int shootButtonNum = 1;
+    public static final int intakeButtonNum = 2;
+    public static final int feederButtonNum = 4;
 }

@@ -10,13 +10,14 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShooterCommand extends CommandBase {
 
   ShooterSubsystem shooterSubsystem;
-  double speed;
+  double sSpeed, fSpeed;
 
   /** Creates a new ShooterCommand. */
-  public ShooterCommand(ShooterSubsystem shooterSubsystem, double speed) {
+  public ShooterCommand(ShooterSubsystem shooterSubsystem, double sSpeed, double fSpeed) {
 
     this.shooterSubsystem = shooterSubsystem;
-    this.speed = speed;
+    this.sSpeed = sSpeed;
+    this.fSpeed = fSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooterSubsystem);
   }
@@ -28,8 +29,8 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSubsystem.shootTime(speed, 1.5);
-    shooterSubsystem.shootPID(speed);
+    // shooterSubsystem.shootTime(speed, 1.5);
+    shooterSubsystem.shootPID(sSpeed, fSpeed);
   }
 
   // Called once the command ends or is interrupted.
