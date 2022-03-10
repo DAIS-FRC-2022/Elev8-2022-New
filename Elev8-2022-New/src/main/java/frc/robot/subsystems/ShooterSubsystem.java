@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -15,6 +16,8 @@ public class ShooterSubsystem extends SubsystemBase {
   /** Creates a new ShooterSubsystem. */
   private final CANSparkMax shooterMotor;
   private final CANSparkMax feederMotor;
+  private final Servo FeederServo;
+
 
   public ShooterSubsystem() {
 
@@ -24,9 +27,13 @@ public class ShooterSubsystem extends SubsystemBase {
     //flyWheel = new MotorControllerGroup(FWL, FWR);
     shooterMotor = new CANSparkMax(Constants.ShooterPort, MotorType.kBrushless); //Have to check whether its brushless or brushed
     feederMotor = new CANSparkMax(Constants.FeederPort, MotorType.kBrushless);
+    FeederServo = new Servo(Constants.FeederServoPort);
+
     //HoodL = new Servo(Constants.HoodL_port);
     //HoodR = new Servo(Constants.HoodR_port);
     //Hood = new MotorControllerGroup(HoodL, HoodR);
+
+
 
 
   }
@@ -71,4 +78,7 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.set(speed);
   }
 
+  public void setServo(double power){
+    FeederServo.set(power);
+  }
 }

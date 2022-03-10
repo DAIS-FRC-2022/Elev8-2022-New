@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeServo;
 import frc.robot.commands.LimelightShoot;
 import frc.robot.commands.MoveByDistanceCommand;
 import frc.robot.commands.ShooterCommand;
@@ -77,6 +78,10 @@ public class RobotContainer {
     JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeButtonNum);
     intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5));
     intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0));
+
+    JoystickButton feederServoButton = new JoystickButton(joy1, Constants.FeederServoPort);
+    feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 0));
+    feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 1));
 
     // JoystickButton autoButton = new JoystickButton(joy1, 4);
     // autoButton.whenPressed(new SwerveByDist(driveSubsystem, 5, 5));
