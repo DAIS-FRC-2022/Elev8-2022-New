@@ -79,7 +79,7 @@ public class RobotContainer {
     intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5));
     intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0));
 
-    JoystickButton feederServoButton = new JoystickButton(joy1, Constants.FeederServoPort);
+    JoystickButton feederServoButton = new JoystickButton(joy1, Constants.feederServoButtonNum);
     feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 0));
     feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 1));
 
