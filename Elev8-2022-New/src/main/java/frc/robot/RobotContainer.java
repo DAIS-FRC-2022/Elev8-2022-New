@@ -9,6 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.FeederCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeServo;
 import frc.robot.commands.LimelightShoot;
@@ -71,17 +72,22 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton shooterButton = new JoystickButton(joy1, Constants.shootButtonNum);
-    shooterButton.whenActive(new ShooterCommand(shooterSubsystem, 0, 0.5));
-    shooterButton.whenReleased(new ShooterCommand(shooterSubsystem, 0, 0 ));
+    // JoystickButton shooterButton = new JoystickButton(joy1, 11 );
+    // shooterButton.whenActive(new ShooterCommand(shooterSubsystem, 0.5));
+    // shooterButton.whenPressed(new ShooterCommand(shooterSubsystem, 0.7));
+    // shooterButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
 
-    JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeButtonNum);
+    JoystickButton intakeButton = new JoystickButton(joy1, 1);
     intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5));
     intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0));
 
     JoystickButton feederServoButton = new JoystickButton(joy1, Constants.FeederServoPort);
     feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 0));
     feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 1));
+
+    // JoystickButton feederServoButton = new JoystickButton(joy1, Constants.FeederServoPort);
+    // feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 0));
+    // feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 1));
 
     // JoystickButton autoButton = new JoystickButton(joy1, 4);
     // autoButton.whenPressed(new SwerveByDist(driveSubsystem, 5, 5));
@@ -110,7 +116,7 @@ public class RobotContainer {
     if (Math.abs(value) < deadband) return 0;
     return value;
   }
-
+  
   public static double getX(Joystick joy, double deadband) {
     double value = joy.getX();
     if (Math.abs(value) < deadband) return 0;

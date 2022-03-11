@@ -7,16 +7,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterCommand extends CommandBase {
-
+public class FeederCommand extends CommandBase {
   ShooterSubsystem shooterSubsystem;
-  double sSpeed, fSpeed;
-
-  /** Creates a new ShooterCommand. */
-  public ShooterCommand(ShooterSubsystem shooterSubsystem, double sSpeed){
-    this.shooterSubsystem = shooterSubsystem;
-    this.sSpeed = sSpeed;
+  double speed;
+  /** Creates a new FeederCommand. */
+  public FeederCommand(ShooterSubsystem shooterSubsystem, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.shooterSubsystem = shooterSubsystem;
+    this.speed = speed;
     addRequirements(shooterSubsystem);
   }
 
@@ -27,8 +25,7 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // shooterSubsystem.shootTime(speed, 1.5);
-    shooterSubsystem.shootRaw(sSpeed);
+    shooterSubsystem.feed(speed);
   }
 
   // Called once the command ends or is interrupted.

@@ -22,6 +22,7 @@ public final class Constants {
     public static final int ShooterPort = 5;
     public static final int IntakePort = 2;
     public static final int FeederPort = 1;
+    public static final int ServoButtonNum = 6;
 
 
     public static double arcadeMaxSpeed = 0.5;
@@ -60,5 +61,6 @@ public final class Constants {
     public static final int shootButtonNum = 1;
     public static final int intakeButtonNum = 2;
     public static final int feederButtonNum = 4;
+
     public static final int FeederServoPort = 5;
 }
