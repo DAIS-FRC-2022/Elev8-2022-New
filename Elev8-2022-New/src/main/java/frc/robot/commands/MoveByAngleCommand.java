@@ -31,7 +31,7 @@ public class MoveByAngleCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    this.error = this.setpoint - (RobotContainer.navx.getYaw() * 1.1);
+    this.error = this.setpoint - (RobotContainer.navx.getYaw());
     double correction = this.error * Constants.kPTurn;
     this.driveSubsystem.moveByAngle(correction);
   }
@@ -43,6 +43,6 @@ public class MoveByAngleCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(this.error) <= Math.max(1.00d, (this.setpoint * 0.03)));
+    return (Math.abs(this.error) <= /*Math.max(10.00d, (*/this.setpoint * 0.15);
   }
 }

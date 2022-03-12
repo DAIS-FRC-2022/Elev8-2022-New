@@ -40,7 +40,7 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
-    shooterMotor.set(0.5);
+   // shooterMotor.set(0.5);
     // This method will be called once per scheduler run
   }
   

@@ -76,7 +76,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("FL_Encoder", FL_encoder.getPosition());
+    SmartDashboard.putNumber("navx", RobotContainer.navx.getYaw());
     // This method will be called once per scheduler run
     //m_pose = m_odometry.update(RobotContainer.navx.getRotation2d(), leftDistanceMeters, rightDistanceMeters)
     

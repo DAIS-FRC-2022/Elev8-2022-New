@@ -37,7 +37,7 @@ public final class Constants {
 
     public static final double G = 9.81;
 
-    public static double kPTurn = 0.0085;
+    public static double kPTurn = 0.00035;
     public static double kPDist = 0.21;
 
     public static double wheel2wheelDist = 23.75;
@@ -51,7 +51,9 @@ public final class Constants {
     public static double kPShoot = 0.01;
     public static double kIShoot = 0;    
     public static double kDShoot = 1;
+    
     // kP, kI, kD to be tuned
+    
     public static double wheelDia = 0.152d;
     public static double rpm = 93.37;
     public static double realMaxSpeed = rpm/60*Math.PI*wheelDia;
