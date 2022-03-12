@@ -41,6 +41,7 @@ public class RobotContainer {
 
   // Commands
   private final DriveCommand driveCommand = new DriveCommand(driveSubsystem);
+  private final IntakeCommand intakeCommand = new IntakeCommand(intakeSubsystem,0);
 
   // IO Devices
   public static Joystick joy1 = new Joystick(0);
@@ -62,6 +63,7 @@ public class RobotContainer {
     configureButtonBindings();
 
     driveSubsystem.setDefaultCommand(driveCommand);
+    //intakeSubsystem.setDefaultCommand(intakeCommand);
   }
 
   /**
@@ -76,8 +78,7 @@ public class RobotContainer {
     shooterButton.whenReleased(new ShooterCommand(shooterSubsystem, 0, 0 ));
 
     JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeButtonNum);
-    intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5));
-    intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0));
+    intakeButton.toggleWhenPressed(new IntakeCommand(intakeSubsystem, -0.5));
 
     JoystickButton feederServoButton = new JoystickButton(joy1, Constants.feederServoButtonNum);
     feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 0));
@@ -111,8 +112,8 @@ public class RobotContainer {
     return value;
   }
 
-  public static double getX(Joystick joy, double deadband) {
-    double value = joy.getX();
+  public static double getZ(Joystick joy, double deadband) {
+    double value = joy.getZ();
     if (Math.abs(value) < deadband) return 0;
     return value;
   }

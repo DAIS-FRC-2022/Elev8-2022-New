@@ -28,29 +28,29 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
     double yaxis = RobotContainer.getY(RobotContainer.joy1, Constants.deadband); 
-    double xaxis = RobotContainer.getX(RobotContainer.joy1, Constants.deadband); 
+    double zaxis = RobotContainer.getZ(RobotContainer.joy1, Constants.deadband); 
 
-    if (yaxis >= -0.5 && yaxis <= 0.5) {
-      yaxis = yaxis * yaxis * yaxis * 3;
-    }
-    else if (yaxis >= 0.5 && yaxis <= 1) {
-      yaxis = yaxis*1.5 - 0.5;
-    }
-    else if (yaxis >= -1 && yaxis <= -0.5) {
-      yaxis = yaxis*1.5 + 0.5;
-    }
+    // if (yaxis >= -0.5 && yaxis <= 0.5) {
+    //   yaxis = yaxis * yaxis * yaxis * 3;
+    // }
+    // else if (yaxis >= 0.5 && yaxis <= 1) {
+    //   yaxis = yaxis*1.5 - 0.5;
+    // }
+    // else if (yaxis >= -1 && yaxis <= -0.5) {
+    //   yaxis = yaxis*1.5 + 0.5;
+    // }
 
-    if (xaxis >= -0.5 && xaxis <= 0.5) {
-      xaxis = xaxis * xaxis * xaxis * 3;
-    }
-    else if (xaxis >= 0.5 && xaxis <= 1) {
-      xaxis = xaxis*1.5 - 0.5;
-    }
-    else if (xaxis >= -1 && xaxis <= -0.5) {
-      xaxis = xaxis*1.5 + 0.5;
-    }
+    // if (xaxis >= -0.5 && xaxis <= 0.5) {
+    //   xaxis = xaxis * xaxis * xaxis * 3;
+    // }
+    // else if (xaxis >= 0.5 && xaxis <= 1) {
+    //   xaxis = xaxis*1.5 - 0.5;
+    // }
+    // else if (xaxis >= -1 && xaxis <= -0.5) {
+    //   xaxis = xaxis*1.5 + 0.5;
+    // }
 
-    driveSubsystem.arcadeInbuilt(yaxis, xaxis);
+    driveSubsystem.arcadeInbuilt(yaxis, zaxis);
   }
 
   // Called once the command ends or is interrupted.

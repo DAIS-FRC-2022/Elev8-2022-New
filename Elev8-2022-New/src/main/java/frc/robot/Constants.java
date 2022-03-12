@@ -60,5 +60,9 @@ public final class Constants {
     public static final int shootButtonNum = 1;
     public static final int intakeButtonNum = 2;
     public static final int feederButtonNum = 4;
-    public static final int FeederServoPort = 5;
+    public static final int feederServoButtonNum = 5;
+
+
+
+    public static final int FeederServoPort = 10;
 }
