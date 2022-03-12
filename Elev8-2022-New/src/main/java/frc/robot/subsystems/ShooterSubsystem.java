@@ -27,19 +27,20 @@ public class ShooterSubsystem extends SubsystemBase {
     //flyWheel = new MotorControllerGroup(FWL, FWR);
     shooterMotor = new CANSparkMax(Constants.ShooterPort, MotorType.kBrushless); //Have to check whether its brushless or brushed
     feederMotor = new CANSparkMax(Constants.FeederPort, MotorType.kBrushless);
+
     FeederServo = new Servo(Constants.FeederServoPort);
+
 
     //HoodL = new Servo(Constants.HoodL_port);
     //HoodR = new Servo(Constants.HoodR_port);
     //Hood = new MotorControllerGroup(HoodL, HoodR);
 
-
-
-
   }
 
   @Override
   public void periodic() {
+
+    shooterMotor.set(0.5);
     // This method will be called once per scheduler run
   }
   
@@ -74,8 +75,14 @@ public class ShooterSubsystem extends SubsystemBase {
     feederMotor.set(fSpeed);
   }
 
-  public void shootRaw(double speed) {
-    shooterMotor.set(speed);
+  public void shootRaw(double sspeed){//, double fspeed) {
+    shooterMotor.set(sspeed);
+    //feederMotor.set(fspeed);
+  }
+
+  public void feed(double speed)
+  {
+    feederMotor.set(speed);
   }
 
   public void setServo(double power){

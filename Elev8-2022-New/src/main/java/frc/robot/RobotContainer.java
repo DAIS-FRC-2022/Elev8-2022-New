@@ -9,6 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.FeederCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeServo;
 import frc.robot.commands.LimelightShoot;
@@ -73,9 +74,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton shooterButton = new JoystickButton(joy1, Constants.shootButtonNum);
-    shooterButton.whenActive(new ShooterCommand(shooterSubsystem, 0, 0.5));
-    shooterButton.whenReleased(new ShooterCommand(shooterSubsystem, 0, 0 ));
+    // JoystickButton shooterButton = new JoystickButton(joy1, 11 );
+    // shooterButton.whenActive(new ShooterCommand(shooterSubsystem, 0.5));
+    // shooterButton.whenPressed(new ShooterCommand(shooterSubsystem, 0.7));
+    // shooterButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
 
     JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeButtonNum);
     intakeButton.toggleWhenPressed(new IntakeCommand(intakeSubsystem, -0.5));
@@ -83,6 +85,10 @@ public class RobotContainer {
     JoystickButton feederServoButton = new JoystickButton(joy1, Constants.feederServoButtonNum);
     feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 0));
     feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 1));
+
+    // JoystickButton feederServoButton = new JoystickButton(joy1, Constants.FeederServoPort);
+    // feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 0));
+    // feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 1));
 
     // JoystickButton autoButton = new JoystickButton(joy1, 4);
     // autoButton.whenPressed(new SwerveByDist(driveSubsystem, 5, 5));
