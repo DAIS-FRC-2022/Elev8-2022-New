@@ -15,6 +15,7 @@ package frc.robot;
 public final class Constants {
 
     /*PORTS*/
+<<<<<<< Updated upstream
     public static final int FR_port = 3;
     public static final int FL_port = 2;
     public static final int BR_port = 1; 
@@ -25,6 +26,15 @@ public final class Constants {
     public static final int Intake = 7;
     //public static final int HoodL_port = 8;
     //public static final int HoodR_port = 10;
+=======
+    public static final int FR_port = 21;
+    public static final int FL_port = 11;
+    public static final int BR_port = 22; 
+    public static final int BL_port = 12;
+    public static final int Shooter_port = 5;
+    public static final int IntakePort = 2;
+    public static final int FeederPort = 1;
+>>>>>>> Stashed changes
 
 
     public static double arcadeMaxSpeed = 0.6;
@@ -40,7 +50,11 @@ public final class Constants {
     public static final double G = 9.81;
     //public static final double FIELD = 0.762;
 
+<<<<<<< Updated upstream
     public static double kPTurn = 0.0085;
+=======
+    public static double kPTurn = 0.0001;
+>>>>>>> Stashed changes
     public static double kPDist = 0.21;
 
     // public static final double CAM_WIDTH = 854;
@@ -62,5 +76,10 @@ public final class Constants {
 
     //public static double kHood = 1d;
     
+<<<<<<< Updated upstream
     public static final int shootAssistButtonNum = 5;
+=======
+    public static final int shootAssistButtonNum = 1;
+    public static final int intakeBUttonNum = 4;
+>>>>>>> Stashed changes
 }

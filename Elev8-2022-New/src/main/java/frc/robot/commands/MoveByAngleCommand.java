@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
@@ -34,15 +35,22 @@ public class MoveByAngleCommand extends CommandBase {
     this.error = this.setpoint - (RobotContainer.navx.getYaw() * 1.1);
     double correction = this.error * Constants.kPTurn;
     this.driveSubsystem.moveByAngle(correction);
+    SmartDashboard.putNumber("yawRate", RobotContainer.navx.getYaw());
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    driveSubsystem.drive(0,0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+<<<<<<< Updated upstream
     return (Math.abs(this.error) <= Math.max(1.00d, (this.setpoint * Constants.deadband)));
+=======
+    return (Math.abs(this.error) <= Math.max(1.00d, (this.setpoint * 0.025)));
+>>>>>>> Stashed changes
   }
 }

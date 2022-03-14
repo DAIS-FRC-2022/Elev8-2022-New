@@ -9,6 +9,11 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
+<<<<<<< Updated upstream
+=======
+import frc.robot.commands.FeederCommand;
+import frc.robot.commands.IntakeCommand;
+>>>>>>> Stashed changes
 import frc.robot.commands.LimelightShoot;
 import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.subsystems.DriveSubsystem;
@@ -55,7 +60,21 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     JoystickButton shootAssistButton = new JoystickButton(joy1, Constants.shootAssistButtonNum);
+<<<<<<< Updated upstream
     shootAssistButton.whenPressed(new LimelightShoot(shooterSubsystem, driveSubsystem));
+=======
+    shootAssistButton.whenActive(new ShooterCommand(shooterSubsystem, 0.9));
+    shootAssistButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
+
+    JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeBUttonNum);
+    intakeButton.toggleWhenPressed(new IntakeCommand(intakeSubsystem, 0.5));
+
+    // JoystickButton autoButton = new JoystickButton(joy1, 4);
+    // autoButton.whenPressed(new SwerveByDist(driveSubsystem, 5, 5));
+
+    JoystickButton feederButton = new JoystickButton(joy1, 4);
+    feederButton.toggleWhenPressed(new FeederCommand(intakeSubsystem, -0.9));
+>>>>>>> Stashed changes
 
   }
 
