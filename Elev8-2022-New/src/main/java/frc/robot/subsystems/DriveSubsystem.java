@@ -130,4 +130,28 @@ public class DriveSubsystem extends SubsystemBase {
     drive(correctionLeft, correctionRight);
   }
 
+  double previousErrorNavX = 0;
+  double integralNavX = 0;
+
+  public void moveByAnglePIDNavX(double yaxis)
+  {
+     
+    double error = RobotContainer.navx.getRate();
+    
+    integralNavX = integralNavX + error;
+    
+    double derivative = error - previousErrorNavX;
+    
+    previousErrorNavX = error;
+
+    double correction = ((error * Constants.kPTurn) + (integralNavX * Constants.kITurn) + (derivative * Constants.kDTurn));
+
+    double leftSpeed = correction;
+    
+    double rightSpeed = -1*correction;
+
+    drive(leftSpeed * Constants.maxSpeed, rightSpeed * Constants.maxSpeed);
+
+  }
+
 }

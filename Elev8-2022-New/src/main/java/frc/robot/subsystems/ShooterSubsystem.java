@@ -5,35 +5,45 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 
-public class ShooterSubsystem extends SubsystemBase {
+public class ShooterSubsystem extends SubsystemBase
+{
 
-  /** Creates a new ShooterSubsystem. */
   private final CANSparkMax shooterMotor;
   private final CANSparkMax feederMotor;
+  private final SparkMaxPIDController shootPIDController;
   private final Servo FeederServo;
+  public static RelativeEncoder shootEncoder;
 
 
-  public ShooterSubsystem() {
+  public ShooterSubsystem()
+  {
 
-
-    //FWL = new WPI_TalonSRX(Constants.FWL_port);
-    //FWR = new WPI_TalonSRX(Constants.FWR_port);
-    //flyWheel = new MotorControllerGroup(FWL, FWR);
     shooterMotor = new CANSparkMax(Constants.ShooterPort, MotorType.kBrushless); //Have to check whether its brushless or brushed
     feederMotor = new CANSparkMax(Constants.FeederPort, MotorType.kBrushless);
-
     FeederServo = new Servo(Constants.FeederServoPort);
 
+    this.shootPIDController = this.shooterMotor.getPIDController();
 
-    //HoodL = new Servo(Constants.HoodL_port);
-    //HoodR = new Servo(Constants.HoodR_port);
-    //Hood = new MotorControllerGroup(HoodL, HoodR);
+    ShooterSubsystem.shootEncoder = this.shooterMotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
+
+
+
+    this.shootPIDController.setP(0.00012);
+    this.shootPIDController.setI(3e-8);
+    this.shootPIDController.setD(1.2);
+    this.shootPIDController.setIZone(0);
+    this.shootPIDController.setFF(0.00017);
+    this.shootPIDController.setOutputRange(-1, 1);
 
   }
 
@@ -87,5 +97,23 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void setServo(double power){
     FeederServo.set(power);
+  }
+
+  public void shootProp(double pow)
+
+  {
+    double speedmotor = shootEncoder.getVelocity();
+    if (Math.abs(speedmotor) < 1500)
+    {
+      this.shootPIDController.setReference(pow*6000, CANSparkMax.ControlType.kVelocity);
+      // SmartDashboard.putNumber("POSITION",
+      // ShooterSubsystem.shootEncoder.getPosition());
+      SmartDashboard.putNumber("VELOCITY", ShooterSubsystem.shootEncoder.getPosition());
+    }
+    else
+    {
+      this.shooterMotor.set(0);
+    }
+
   }
 }

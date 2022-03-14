@@ -16,7 +16,7 @@ public class HangerSubsystem extends SubsystemBase
   WPI_TalonFX hangerRightTalonFX;
   TalonSRX hangerOuterArm;
 
-  // second 2 - neo + 1 piggy
+  //Second
 
   CANSparkMax hangerLeftNeo;
   CANSparkMax hangerRightNeo;
