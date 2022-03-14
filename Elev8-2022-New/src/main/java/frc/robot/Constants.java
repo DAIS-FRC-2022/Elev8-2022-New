@@ -37,7 +37,10 @@ public final class Constants {
 
     public static final double G = 9.81;
 
-    public static double kPTurn = 0.00035;
+    public static double kPTurn = 0.0001;
+    public static double kITurn = 0.00001;
+    public static double kDTurn = 0.0001;
+
     public static double kPDist = 0.21;
 
     public static double wheel2wheelDist = 23.75;
@@ -65,4 +68,9 @@ public final class Constants {
     public static final int feederButtonNum = 4;
     public static final int feederServoButtonNum = 5;
     public static final int FeederServoPort = 10;
+    public static final int leftTalonFXPort = 0;
+    public static final int rightTalonFXPort = 0;
+    public static final int outerHangerArmPort = 0;
+    public static final int hangerLeftNeoPort = 0;
+    public static final int innerHangerArmPort = 0;
 }
