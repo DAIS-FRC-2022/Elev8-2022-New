@@ -28,7 +28,8 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute() {
     // shooterSubsystem.shootTime(speed, 1.5);
-    shooterSubsystem.shootRaw(sSpeed);
+    //shooterSubsystem.shootRaw(sSpeed);
+    shooterSubsystem.shootProp(3000);
   }
 
   // Called once the command ends or is interrupted.
