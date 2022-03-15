@@ -60,7 +60,7 @@ public class HangerSubsystem extends SubsystemBase {
 
   public void holdPosition(TalonSRX motor)
   {
-    motor.setSelectedSensorPosition(motor.getSelectedSensorPosition(0));
+    motor.setSelectedSensorPosition(motor.getSelectedSensorPosition(0), 0, 0);
   }
 
 
