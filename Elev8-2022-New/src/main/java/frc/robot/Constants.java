@@ -33,12 +33,11 @@ public final class Constants {
     public static final int rightSecondRungPort = 5; // neo
     public static final int leftSecondRungPort = 6; // neo
 
-    public static final int piggyRightPort = 14;
-    public static final int piggyLeftPort = 15;
-
+    public static final int pgRightPort = 14;
+    public static final int pgLeftPort = 15;
 
     public static double arcadeMaxSpeed = 0.5;
-    public static double maxSpeed = 0.3;
+    public static double maxSpeed = 0.8;
     public static double minSpeed = 0.1;
     public static double deadband = 0.2;
 
@@ -60,6 +59,7 @@ public final class Constants {
     public static double goalHt = 2.6416; //set this to the actual goal height (in metres preferably)
     public static double limelightAngle = 30d;
     public static double ShotConstant = 0.001;
+    
     public static double kPShoot = 0.01;
     public static double kIShoot = 0;    
     public static double kDShoot = 1;
@@ -71,7 +71,7 @@ public final class Constants {
     public static double Tperiod = 1d;
 
     public static final int intakeButtonNum = 2;
-    public static final int feederButtonNum = 4;
+    public static final int feederButtonNum = 12;
     public static final int shooterButtonNum = 1;
 
     public static final int reachFirstRungButton = 100;

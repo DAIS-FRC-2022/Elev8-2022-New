@@ -39,13 +39,12 @@ public class ShooterSubsystem extends SubsystemBase {
     this.shootPIDController.setIZone(0);
     this.shootPIDController.setFF(0.00017);
     this.shootPIDController.setOutputRange(-1, 1);
-
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    shooterMotor.set(0.2);
+    shooterMotor.set(0.53);
   }
   
   public void shootTime(double speed, double rampupTime) {
@@ -65,7 +64,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   double integral = 0;
   double prevError = 0;
-  public void shootPID(double sSpeed, double fSpeed) {
+  public void shootPID(double sSpeed) {
     double error = sSpeed - shooterMotor.get();
 
     double derivative = error - prevError;
@@ -75,8 +74,6 @@ public class ShooterSubsystem extends SubsystemBase {
     
     double correction = error*Constants.kPShoot + derivative*Constants.kDShoot + integral*Constants.kIShoot;
     shooterMotor.set(sSpeed + correction);
-
-    feederMotor.set(fSpeed);
   }
 
   public void shootRaw(double sspeed){//, double fspeed) {

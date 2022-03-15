@@ -10,10 +10,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,9 +26,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final CANSparkMax FR;
   private final CANSparkMax BR;
-
   private final MotorControllerGroup rightSide;
-
 
   private final CANSparkMax FL;
   private final CANSparkMax BL;
@@ -43,10 +39,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final DifferentialDrive driveTrain;
 
-  public final DifferentialDriveKinematics kinematics;
-  public DifferentialDriveOdometry m_odometry;
-  public DifferentialDriveOdometry m_pose;
-
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
 
@@ -56,30 +48,20 @@ public class DriveSubsystem extends SubsystemBase {
     
     FL = new CANSparkMax(Constants.FL_port, MotorType.kBrushless);
     BL = new CANSparkMax(Constants.BL_port, MotorType.kBrushless);
+    leftSide = new MotorControllerGroup(FL, BL);
 
     FR_encoder = FR.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
     BR_encoder = BR.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
     FL_encoder = FL.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
     BL_encoder = BL.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
-
-    
-    leftSide = new MotorControllerGroup(FL, BL);
-    
     driveTrain = new DifferentialDrive(leftSide, rightSide);
-
-    kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(Constants.wheel2wheelDist));
-    m_odometry = new DifferentialDriveOdometry(RobotContainer.navx.getRotation2d());
-
-
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("FL_Encoder", FL_encoder.getPosition());
     // This method will be called once per scheduler run
-    //m_pose = m_odometry.update(RobotContainer.navx.getRotation2d(), leftDistanceMeters, rightDistanceMeters)
-    
+    SmartDashboard.putNumber("FL_Encoder", FL_encoder.getPosition());
   }
 
   public void arcadeInbuilt(double y, double x) {
@@ -103,7 +85,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   public double getAverageDistance() {
     return ((FR_encoder.getPosition()+BR_encoder.getPosition() + FL_encoder.getPosition()+ BL_encoder.getPosition()/4)*Math.PI*Constants.wheelDia);
-    //return((((FL.getEncoder().getPosition() + BR.getEncoder().getPosition())/2)/Constants.gearRatio) * Math.PI * Constants.wheelDia);
   }
 
   public void moveByDistance(double correction) {

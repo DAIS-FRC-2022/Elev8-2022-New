@@ -50,9 +50,13 @@ public class RobotContainer {
     intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5));
     intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0));
 
-    JoystickButton feederServoButton = new JoystickButton(joy1, Constants.shooterButtonNum);
-    feederServoButton.whenActive(new ShooterCommand(shooterSubsystem, 3600, 1));
-    feederServoButton.whenReleased(new ShooterCommand(shooterSubsystem, 1200, 0));
+    // JoystickButton feederServoButton = new JoystickButton(joy1, Constants.shooterButtonNum);
+    // feederServoButton.whenActive(new ShooterCommand(shooterSubsystem, 0.8, 0));
+    // feederServoButton.whenReleased(new ShooterCommand(shooterSubsystem, 0.2, 0));
+
+    JoystickButton feederButton = new JoystickButton(joy1, Constants.feederButtonNum);
+    feederButton.whenActive(new FeederCommand(shooterSubsystem, 0.5));
+    feederButton.whenReleased(new FeederCommand(shooterSubsystem, 0));
 
     JoystickButton reachFirstRungButton = new JoystickButton(joy1, Constants.reachFirstRungButton);
     reachFirstRungButton.whenActive(new ReachFirstRungCommand(hangerSubsystem, 0.2));
@@ -70,9 +74,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-
-    //return new SwerveByDist(driveSubsystem, 1, 1);
-    //return new SwerveCommand(driveSubsystem, 90, 1);
     return new MoveByDistanceCommand(driveSubsystem, 1);
   }
 

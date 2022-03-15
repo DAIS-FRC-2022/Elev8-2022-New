@@ -43,8 +43,8 @@ public class HangerSubsystem extends SubsystemBase {
     leftSecondRungEncoder = leftSecondRung.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
     rightSecondRungEncoder = rightSecondRung.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
-    pgLeft = new WPI_TalonSRX(Constants.piggyLeftPort);
-    pgRight = new WPI_TalonSRX(Constants.piggyRightPort);
+    pgLeft = new WPI_TalonSRX(Constants.pgLeftPort);
+    pgRight = new WPI_TalonSRX(Constants.pgRightPort);
     pgs = new MotorControllerGroup(pgLeft, pgRight);
   }
 

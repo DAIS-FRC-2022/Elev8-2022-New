@@ -29,7 +29,7 @@ public class ShooterCommand extends CommandBase {
   public void execute() {
     // shooterSubsystem.shootTime(speed, 1.5);
     // shooterSubsystem.shootRaw(sSpeed);
-    shooterSubsystem.shootRaw(shooterSpeed);
+    shooterSubsystem.shootPID(shooterSpeed);
     shooterSubsystem.setServo(servoAngle);
   }
 
