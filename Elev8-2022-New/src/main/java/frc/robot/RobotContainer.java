@@ -29,7 +29,6 @@ public class RobotContainer {
   // Commands
   
   private final DriveCommand driveCommand = new DriveCommand(driveSubsystem);
-  private final ShooterCommand shooterCommand = new ShooterCommand(shooterSubsystem, 0.2);
 
 
   // IO Devices
@@ -44,16 +43,16 @@ public class RobotContainer {
     configureButtonBindings();
 
     driveSubsystem.setDefaultCommand(driveCommand);
-    shooterSubsystem.setDefaultCommand(shooterCommand);
   }
 
   private void configureButtonBindings() {
     JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeButtonNum);
-    intakeButton.toggleWhenPressed(new IntakeCommand(intakeSubsystem, -0.5));
+    intakeButton.whenActive(new IntakeCommand(intakeSubsystem, -0.5));
+    intakeButton.whenReleased(new IntakeCommand(intakeSubsystem, 0));
 
-    JoystickButton feederServoButton = new JoystickButton(joy1, Constants.feederServoButtonNum);
-    feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 90));
-    feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 180));
+    JoystickButton feederServoButton = new JoystickButton(joy1, Constants.shooterButtonNum);
+    feederServoButton.whenActive(new ShooterCommand(shooterSubsystem, 3600, 1));
+    feederServoButton.whenReleased(new ShooterCommand(shooterSubsystem, 1200, 0));
 
     JoystickButton reachFirstRungButton = new JoystickButton(joy1, Constants.reachFirstRungButton);
     reachFirstRungButton.whenActive(new ReachFirstRungCommand(hangerSubsystem, 0.2));

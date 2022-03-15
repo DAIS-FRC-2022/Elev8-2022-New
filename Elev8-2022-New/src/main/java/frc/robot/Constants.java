@@ -24,7 +24,7 @@ public final class Constants {
     public static final int IntakePort = 1;
     public static final int FeederPort = 2;
     public static final int ShooterPort = 3;
-    public static final int ServoButtonNum = 6;
+    public static final int feederServoChannel = 0;
 
     // Hanger ports - WRONG
     public static final int rightFirstRungPort = 5; // falcon
@@ -70,13 +70,10 @@ public final class Constants {
     public static double realMaxSpeed = rpm/60*Math.PI*wheelDia;
     public static double Tperiod = 1d;
 
-    
-    public static final int shootButtonNum = 1;
     public static final int intakeButtonNum = 2;
     public static final int feederButtonNum = 4;
-    public static final int feederServoButtonNum = 5;
-    public static final int FeederServoPort = 10;
+    public static final int shooterButtonNum = 1;
 
-    public static final int reachFirstRungButton = 5;
-    public static final int reachSecondRungButton = 6;
+    public static final int reachFirstRungButton = 100;
+    public static final int reachSecondRungButton = 111;
 }

@@ -21,42 +21,31 @@ public class ShooterSubsystem extends SubsystemBase {
   private final CANSparkMax shooterMotor;
   private final CANSparkMax feederMotor;
   private final SparkMaxPIDController shootPIDController;
-  private final Servo FeederServo;
+  private final Servo servo;
   public static RelativeEncoder shootEncoder;
 
 
   public ShooterSubsystem() {
-
-
-    //FWL = new WPI_TalonSRX(Constants.FWL_port);
-    //FWR = new WPI_TalonSRX(Constants.FWR_port);
-    //flyWheel = new MotorControllerGroup(FWL, FWR);
     shooterMotor = new CANSparkMax(Constants.ShooterPort, MotorType.kBrushless); //Have to check whether its brushless or brushed
     feederMotor = new CANSparkMax(Constants.FeederPort, MotorType.kBrushless);
 
-    FeederServo = new Servo(Constants.FeederServoPort);
+    servo = new Servo(Constants.feederServoChannel);
     this.shootPIDController = this.shooterMotor.getPIDController();
     ShooterSubsystem.shootEncoder = this.shooterMotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
-    this.shootPIDController.setP(0.00012);
-    this.shootPIDController.setI(3e-8);
-    this.shootPIDController.setD(1.2);
+    this.shootPIDController.setP(0.0012);
+    this.shootPIDController.setI(0);
+    this.shootPIDController.setD(0);
     this.shootPIDController.setIZone(0);
     this.shootPIDController.setFF(0.00017);
     this.shootPIDController.setOutputRange(-1, 1);
-
-
-    //HoodL = new Servo(Constants.HoodL_port);
-    //HoodR = new Servo(Constants.HoodR_port);
-    //Hood = new MotorControllerGroup(HoodL, HoodR);
 
   }
 
   @Override
   public void periodic() {
-
-    //shooterMotor.set(0.5);
     // This method will be called once per scheduler run
+    shooterMotor.set(0.2);
   }
   
   public void shootTime(double speed, double rampupTime) {
@@ -95,13 +84,12 @@ public class ShooterSubsystem extends SubsystemBase {
     //feederMotor.set(fspeed);
   }
 
-  public void feed(double speed)
-  {
+  public void feed(double speed) {
     feederMotor.set(speed);
   }
 
-  public void setServo(double angle){
-    FeederServo.setAngle(angle);
+  public void setServo(double pos){
+    servo.set(pos);
   }
 
   public void shootProp(double rpm)

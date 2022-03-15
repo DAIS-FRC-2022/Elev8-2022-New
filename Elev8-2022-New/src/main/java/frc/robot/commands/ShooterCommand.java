@@ -10,12 +10,12 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShooterCommand extends CommandBase {
 
   ShooterSubsystem shooterSubsystem;
-  double sSpeed, fSpeed;
+  double shooterSpeed, servoAngle;
 
   /** Creates a new ShooterCommand. */
-  public ShooterCommand(ShooterSubsystem shooterSubsystem, double sSpeed){
+  public ShooterCommand(ShooterSubsystem shooterSubsystem, double shooterSpeed, double servoAngle){
     this.shooterSubsystem = shooterSubsystem;
-    this.sSpeed = sSpeed;
+    this.shooterSpeed = shooterSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooterSubsystem);
   }
@@ -28,8 +28,9 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute() {
     // shooterSubsystem.shootTime(speed, 1.5);
-    //shooterSubsystem.shootRaw(sSpeed);
-    shooterSubsystem.shootProp(3000);
+    // shooterSubsystem.shootRaw(sSpeed);
+    shooterSubsystem.shootRaw(shooterSpeed);
+    shooterSubsystem.setServo(servoAngle);
   }
 
   // Called once the command ends or is interrupted.
