@@ -106,16 +106,20 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void shootProp(double rpm)
   {
-    double speedmotor = shootEncoder.getVelocity();
-    if (Math.abs(speedmotor) < 1500) {
-      this.shootPIDController.setReference(rpm, CANSparkMax.ControlType.kVelocity);
+    // double speedmotor = shootEncoder.getVelocity();
+    // if (Math.abs(speedmotor) < 1500) {
+    //   this.shootPIDController.setReference(rpm, CANSparkMax.ControlType.kVelocity);
+    //   // SmartDashboard.putNumber("POSITION",
+    //   // ShooterSubsystem.shootEncoder.getPosition());
+    //   SmartDashboard.putNumber("VELOCITY", ShooterSubsystem.shootEncoder.getPosition());
+    // } 
+    // else
+    // {
+    //   this.shooterMotor.set(0);
+    // }
+    this.shootPIDController.setReference(rpm, CANSparkMax.ControlType.kVelocity);
       // SmartDashboard.putNumber("POSITION",
       // ShooterSubsystem.shootEncoder.getPosition());
-      SmartDashboard.putNumber("VELOCITY", ShooterSubsystem.shootEncoder.getPosition());
-    } 
-    else
-    {
-      this.shooterMotor.set(0);
-    }
+    //SmartDashboard.putNumber("VELOCITY", ShooterSubsystem.shootEncoder.getPosition());
   }
 }
