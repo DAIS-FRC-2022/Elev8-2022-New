@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -10,10 +6,9 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.*;
 import frc.robot.commands.Drivetrain.*;
+import frc.robot.commands.Hanger.ReachFirstRungCommand;
+import frc.robot.commands.Hanger.ReachSecondRungCommand;
 import frc.robot.commands.Limelight.*;
-import edu.wpi.first.wpilibj.Encoder;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxRelativeEncoder;
 
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HangerSubsystem;
@@ -22,36 +17,26 @@ import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
+ 
   // The robot's subsystems and commands are defined here...
+ 
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final HangerSubsystem hangerSubsystem = new HangerSubsystem();
 
   // Commands
+  
   private final DriveCommand driveCommand = new DriveCommand(driveSubsystem);
   private final IntakeCommand intakeCommand = new IntakeCommand(intakeSubsystem,0);
+  private final ShooterCommand shooterCommand = new ShooterCommand(shooterSubsystem, 0.2);
+
 
   // IO Devices
+  
   public static Joystick joy1 = new Joystick(0);
-
-  // public static Encoder encR = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-  // public static Encoder encL = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
- 
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
-
-  // public static RelativeEncoder FR_encoder;
-  // public static RelativeEncoder BR_encoder;
-  // public static RelativeEncoder FL_encoder; 
-  // public static RelativeEncoder BL_encoder;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -60,21 +45,10 @@ public class RobotContainer {
     configureButtonBindings();
 
     driveSubsystem.setDefaultCommand(driveCommand);
-    //intakeSubsystem.setDefaultCommand(intakeCommand);
+    shooterSubsystem.setDefaultCommand(shooterCommand);
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
-    // JoystickButton shooterButton = new JoystickButton(joy1, 11 );
-    // shooterButton.whenActive(new ShooterCommand(shooterSubsystem, 0.5));
-    // shooterButton.whenPressed(new ShooterCommand(shooterSubsystem, 0.7));
-    // shooterButton.whenReleased(new ShooterCommand(shooterSubsystem, 0));
-
     JoystickButton intakeButton = new JoystickButton(joy1, Constants.intakeButtonNum);
     intakeButton.toggleWhenPressed(new IntakeCommand(intakeSubsystem, -0.5));
 
@@ -82,10 +56,13 @@ public class RobotContainer {
     feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 90));
     feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 180));
 
-    // JoystickButton hangSRXButton = new JoystickButton(joy1, 6);
-    // hangSRXButton.whenActive(new TestCommand(hangerSubsystem, 0.3, hangerSubsystem.piggyLeft));
-    // hangSRXButton.whenReleased(new HoldCommand(hangerSubsystem, hangerSubsystem.piggyLeft));
+    JoystickButton reachFirstRungButton = new JoystickButton(joy1, Constants.reachFirstRungButton);
+    reachFirstRungButton.whenActive(new ReachFirstRungCommand(hangerSubsystem, 0.2));
+    feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 0));
 
+    JoystickButton reachSecondRungButton = new JoystickButton(joy1, Constants.reachSecondRungButton);
+    reachSecondRungButton.whenActive(new ReachSecondRungCommand(hangerSubsystem, 0.2));
+    reachSecondRungButton.whenReleased(new ReachSecondRungCommand(hangerSubsystem, 0));
   }
 
   /**
