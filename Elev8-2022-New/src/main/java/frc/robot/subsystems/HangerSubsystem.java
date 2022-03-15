@@ -9,22 +9,33 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class HangerSubsystem extends SubsystemBase {
   /** Creates a new HangerSubsystem. */
-  private final CANSparkMax leftHanger;
-  private final CANSparkMax rightHanger;
+  private final CANSparkMax leftFirstRung;
+  private final CANSparkMax rightFirstRung;
+  private final MotorControllerGroup firstRung;
+
+  private final WPI_TalonFX leftSecondRung;
+  private final WPI_TalonFX rightSecondRung;
+  private final MotorControllerGroup secondRung;
+
   public final WPI_TalonSRX piggyLeft;
   public final WPI_TalonSRX piggyRight;
-  private final MotorControllerGroup hanger;
   private final MotorControllerGroup piggies;
 
   public HangerSubsystem() {
-    leftHanger = new CANSparkMax(Constants.leftHangerPort, MotorType.kBrushless);
-    rightHanger = new CANSparkMax(Constants.rightHangerPort, MotorType.kBrushless);
-    hanger = new MotorControllerGroup(leftHanger, rightHanger);
+    leftFirstRung = new CANSparkMax(Constants.leftFirstRungPort, MotorType.kBrushless);
+    rightFirstRung = new CANSparkMax(Constants.rightFirstRungPort, MotorType.kBrushless);
+    firstRung = new MotorControllerGroup(leftFirstRung, rightFirstRung);
+
+    leftSecondRung = new WPI_TalonFX(Constants.leftSecondRungPort);
+    rightSecondRung = new WPI_TalonFX(Constants.rightSecondRungPort);
+    secondRung = new MotorControllerGroup(leftSecondRung, rightSecondRung);
+
     piggyLeft = new WPI_TalonSRX(Constants.piggyLeftPort);
     piggyRight = new WPI_TalonSRX(Constants.piggyRightPort);
     piggies = new MotorControllerGroup(piggyLeft, piggyRight);
@@ -35,27 +46,22 @@ public class HangerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void FXMove(double pow)
+  public void reachFirstRung(double pow)
   {
-    rightHanger.setInverted(true);
-    hanger.set(pow);
+    rightFirstRung.setInverted(true);
+    firstRung.set(pow);
   }
 
-  public void NeoMove(double pow)
+  public void reachSecondRung(double pow)
   {
-    rightHanger.setInverted(true);
-    hanger.set(pow);
-    //piggyLeft.setSelectedSensorPosition(sensorPos);
-    //piggyLeft.setSelectedSensorPosition(sensorPos, pidIdx, timeoutMs)
+    rightSecondRung.setInverted(true);
+    secondRung.set(pow);
   }
-
-
 
   // idk what this is
   public void holdPosition(WPI_TalonSRX motor)
   {
     motor.setSelectedSensorPosition(motor.getSelectedSensorPosition(0), 0, 0);
   }
-
 
 }

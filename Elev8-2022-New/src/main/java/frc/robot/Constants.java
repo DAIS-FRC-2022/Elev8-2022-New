@@ -14,20 +14,27 @@ package frc.robot;
  */
 public final class Constants {
 
-    // Ports
+    // Motor Ports
     public static final int FR_port = 21;
     public static final int FL_port = 11;
     public static final int BR_port = 22; 
     public static final int BL_port = 12;
-    public static final int ShooterPort = 0;
+
+    // Other susbsytem ports
     public static final int IntakePort = 1;
     public static final int FeederPort = 2;
+    public static final int ShooterPort = 3;
     public static final int ServoButtonNum = 6;
+
+    // Hanger ports
+    public static final int rightFirstRungPort = 5; // falcon
+    public static final int leftFirstRungPort = 6; // falcon
+
+    public static final int rightSecondRungPort = ; // neo
+    public static final int leftSecondRungPort = ; // neo
 
     public static final int piggyRightPort = 14;
     public static final int piggyLeftPort = 15;
-    public static final int rightHangerPort = 4;
-    public static final int leftHangerPort = 5;
 
 
     public static double arcadeMaxSpeed = 0.5;

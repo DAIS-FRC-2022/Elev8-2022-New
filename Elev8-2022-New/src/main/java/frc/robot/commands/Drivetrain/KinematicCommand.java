@@ -2,22 +2,26 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Drivetrain;
 
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.Constants;
 
-public class MoveByAngleCommand extends CommandBase {
-
+public class KinematicCommand extends CommandBase {
   DriveSubsystem driveSubsystem;
-  double setpoint, error;
-
-  /** Creates a new MoveByAngleCommand. */
-  public MoveByAngleCommand(DriveSubsystem driveSubsystem, double setpoint) {
+  double x,y,speed;
+  ChassisSpeeds chassisSpeeds;
+  DifferentialDriveWheelSpeeds wheelSpeeds;
+  /** Creates a new KinematicCommand. */
+  public KinematicCommand(DriveSubsystem driveSubsystem, double x, double y, double speed) {
     this.driveSubsystem = driveSubsystem;
-    this.setpoint = setpoint;
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveSubsystem);
   }
@@ -26,14 +30,16 @@ public class MoveByAngleCommand extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.navx.reset();
+    //y/x*Constants.realMaxSpeed*speed
+    chassisSpeeds = new ChassisSpeeds(Constants.realMaxSpeed*speed, 0, Math.atan(y/x)/Constants.Tperiod);
+    wheelSpeeds = driveSubsystem.kinematics.toWheelSpeeds(chassisSpeeds);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    this.error = this.setpoint - (RobotContainer.navx.getYaw() * 1.1);
-    double correction = this.error * Constants.kPTurn;
-    this.driveSubsystem.moveByAngle(correction);
+    driveSubsystem.drive(wheelSpeeds.leftMetersPerSecond/Constants.realMaxSpeed, wheelSpeeds.rightMetersPerSecond/Constants.realMaxSpeed);
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -43,6 +49,6 @@ public class MoveByAngleCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(this.error) <= Math.max(1.00d, (this.setpoint * 0.03)));
+    return Math.toDegrees(Math.atan(y/x)) <= RobotContainer.navx.getAngle();
   }
 }

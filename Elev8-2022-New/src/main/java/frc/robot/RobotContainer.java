@@ -8,16 +8,9 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.FeederCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.IntakeServo;
-import frc.robot.commands.LimelightShoot;
-import frc.robot.commands.MoveByDistanceCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.SwerveByDist;
-import frc.robot.commands.SwerveCommand;
-import frc.robot.commands.TestCommand;
+import frc.robot.commands.*;
+import frc.robot.commands.Drivetrain.*;
+import frc.robot.commands.Limelight.*;
 import edu.wpi.first.wpilibj.Encoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxRelativeEncoder;
@@ -92,17 +85,6 @@ public class RobotContainer {
     // JoystickButton hangSRXButton = new JoystickButton(joy1, 6);
     // hangSRXButton.whenActive(new TestCommand(hangerSubsystem, 0.3, hangerSubsystem.piggyLeft));
     // hangSRXButton.whenReleased(new HoldCommand(hangerSubsystem, hangerSubsystem.piggyLeft));
-
-    // JoystickButton feederServoButton = new JoystickButton(joy1, Constants.FeederServoPort);
-    // feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 0));
-    // feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 1));
-
-    // JoystickButton autoButton = new JoystickButton(joy1, 4);
-    // autoButton.whenPressed(new SwerveByDist(driveSubsystem, 5, 5));
-
-    // JoystickButton feederButton = new JoystickButton(joy1, Constants.feederButtonNum);
-    // feederButton.whenActive(new IntakeCommand(intakeSubsystem, 0, -0.5));
-    // feederButton.whenReleased(new IntakeCommand(intakeSubsystem, 0, 0));
 
   }
 
