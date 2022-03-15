@@ -104,15 +104,18 @@ public class ShooterSubsystem extends SubsystemBase {
     FeederServo.setAngle(angle);
   }
 
-  public void shootProp(double pow)
+  public void shootProp(double rpm)
   {
     double speedmotor = shootEncoder.getVelocity();
     if (Math.abs(speedmotor) < 1500) {
-      this.shootPIDController.setReference(pow*6000, CANSparkMax.ControlType.kVelocity);
+      this.shootPIDController.setReference(rpm, CANSparkMax.ControlType.kVelocity);
       // SmartDashboard.putNumber("POSITION",
       // ShooterSubsystem.shootEncoder.getPosition());
       SmartDashboard.putNumber("VELOCITY", ShooterSubsystem.shootEncoder.getPosition());
-    } else
+    } 
+    else
+    {
       this.shooterMotor.set(0);
+    }
   }
 }
