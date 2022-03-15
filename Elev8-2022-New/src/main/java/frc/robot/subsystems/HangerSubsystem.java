@@ -4,39 +4,30 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class HangerSubsystem extends SubsystemBase {
   /** Creates a new HangerSubsystem. */
-  private final WPI_TalonFX leftHanger;
-  private final WPI_TalonFX rightHanger;
-  public final TalonSRX piggyLeft;
-  public final TalonSRX piggyRight;
-  private final CANSparkMax leftNeo;
-  private final CANSparkMax rightNeo;
+  private final CANSparkMax leftHanger;
+  private final CANSparkMax rightHanger;
+  public final WPI_TalonSRX piggyLeft;
+  public final WPI_TalonSRX piggyRight;
   private final MotorControllerGroup hanger;
-  private final MotorControllerGroup neo;
+  private final MotorControllerGroup piggies;
 
   public HangerSubsystem() {
-    leftHanger = new WPI_TalonFX(Constants.leftHangerPort);
-    rightHanger = new WPI_TalonFX(Constants.rightHangerPort);
+    leftHanger = new CANSparkMax(Constants.leftHangerPort, MotorType.kBrushless);
+    rightHanger = new CANSparkMax(Constants.rightHangerPort, MotorType.kBrushless);
     hanger = new MotorControllerGroup(leftHanger, rightHanger);
-    piggyLeft = new TalonSRX(5);
-    piggyRight = new TalonSRX(Constants.piggyRightPort);
-    leftNeo = new CANSparkMax(30, MotorType.kBrushless);
-    rightNeo = new CANSparkMax(31, MotorType.kBrushless);
-    neo = new MotorControllerGroup(leftNeo, rightNeo);
-
+    piggyLeft = new WPI_TalonSRX(Constants.piggyLeftPort);
+    piggyRight = new WPI_TalonSRX(Constants.piggyRightPort);
+    piggies = new MotorControllerGroup(piggyLeft, piggyRight);
   }
 
   @Override
@@ -52,13 +43,16 @@ public class HangerSubsystem extends SubsystemBase {
 
   public void NeoMove(double pow)
   {
-    rightNeo.setInverted(true);
-    neo.set(pow);
+    rightHanger.setInverted(true);
+    hanger.set(pow);
     //piggyLeft.setSelectedSensorPosition(sensorPos);
     //piggyLeft.setSelectedSensorPosition(sensorPos, pidIdx, timeoutMs)
   }
 
-  public void holdPosition(TalonSRX motor)
+
+
+  // idk what this is
+  public void holdPosition(WPI_TalonSRX motor)
   {
     motor.setSelectedSensorPosition(motor.getSelectedSensorPosition(0), 0, 0);
   }

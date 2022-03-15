@@ -18,7 +18,6 @@ import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveByDist;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.TestCommand;
-import frc.robot.commands.holdCommand;
 import edu.wpi.first.wpilibj.Encoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxRelativeEncoder;
@@ -90,9 +89,9 @@ public class RobotContainer {
     feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 90));
     feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 180));
 
-    JoystickButton hangSRXButton = new JoystickButton(joy1, 6);
-    hangSRXButton.whenActive(new TestCommand(hangerSubsystem, 0.3, hangerSubsystem.piggyLeft));
-    hangSRXButton.whenReleased(new holdCommand(hangerSubsystem, hangerSubsystem.piggyLeft));
+    // JoystickButton hangSRXButton = new JoystickButton(joy1, 6);
+    // hangSRXButton.whenActive(new TestCommand(hangerSubsystem, 0.3, hangerSubsystem.piggyLeft));
+    // hangSRXButton.whenReleased(new HoldCommand(hangerSubsystem, hangerSubsystem.piggyLeft));
 
     // JoystickButton feederServoButton = new JoystickButton(joy1, Constants.FeederServoPort);
     // feederServoButton.whenActive(new IntakeServo(shooterSubsystem, 0));

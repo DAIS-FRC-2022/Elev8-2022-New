@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
@@ -15,8 +15,8 @@ public class TestCommand extends CommandBase {
   /** Creates a new TestCommand. */
   HangerSubsystem hangerSubsystem;
   double pow;
-  TalonSRX motor;
-  public TestCommand(HangerSubsystem hangerSubsystem, double pow, TalonSRX motor) {
+  WPI_TalonSRX motor;
+  public TestCommand(HangerSubsystem hangerSubsystem, double pow, WPI_TalonSRX motor) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.hangerSubsystem = hangerSubsystem;
     this.pow = pow;
