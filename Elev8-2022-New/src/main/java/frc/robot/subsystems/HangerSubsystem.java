@@ -10,31 +10,38 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxRelativeEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class HangerSubsystem extends SubsystemBase {
   /** Creates a new HangerSubsystem. */
-  private final CANSparkMax leftFirstRung;
-  private final CANSparkMax rightFirstRung;
+  private final WPI_TalonFX leftFirstRung;
+  private final WPI_TalonFX rightFirstRung;
   private final MotorControllerGroup firstRung;
 
-  private final WPI_TalonFX leftSecondRung;
-  private final WPI_TalonFX rightSecondRung;
+  private final CANSparkMax leftSecondRung;
+  private final CANSparkMax rightSecondRung;
   private final MotorControllerGroup secondRung;
+
+  private final RelativeEncoder leftSecondRungEncoder;
+  private final RelativeEncoder rightSecondRungEncoder;
 
   public final WPI_TalonSRX pgLeft;
   public final WPI_TalonSRX pgRight;
   private final MotorControllerGroup pgs;
 
   public HangerSubsystem() {
-    leftFirstRung = new CANSparkMax(Constants.leftFirstRungPort, MotorType.kBrushless);
-    rightFirstRung = new CANSparkMax(Constants.rightFirstRungPort, MotorType.kBrushless);
+    leftFirstRung = new WPI_TalonFX(Constants.leftFirstRungPort);
+    rightFirstRung = new WPI_TalonFX(Constants.rightFirstRungPort);
     firstRung = new MotorControllerGroup(leftFirstRung, rightFirstRung);
 
-    leftSecondRung = new WPI_TalonFX(Constants.leftSecondRungPort);
-    rightSecondRung = new WPI_TalonFX(Constants.rightSecondRungPort);
+    leftSecondRung = new CANSparkMax(Constants.leftSecondRungPort, MotorType.kBrushless);
+    rightSecondRung = new CANSparkMax(Constants.rightSecondRungPort, MotorType.kBrushless);
     secondRung = new MotorControllerGroup(leftSecondRung, rightSecondRung);
+    leftSecondRungEncoder = leftSecondRung.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
+    rightSecondRungEncoder = rightSecondRung.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
     pgLeft = new WPI_TalonSRX(Constants.piggyLeftPort);
     pgRight = new WPI_TalonSRX(Constants.piggyRightPort);
@@ -54,6 +61,14 @@ public class HangerSubsystem extends SubsystemBase {
   public void reachSecondRung(double pow) {
     rightSecondRung.setInverted(true);
     secondRung.set(pow);
+  }
+
+  public double getEncoderFirstRung() {
+    return (leftSecondRungEncoder.getPosition() + rightSecondRungEncoder.getPosition())/2;
+  }
+
+  public double getEncoderSecondRung() {
+    return (leftSecondRung.getEncoder().getPosition() + rightSecondRung.getEncoder().getPosition())/2;
   }
 
 }

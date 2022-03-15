@@ -29,7 +29,6 @@ public class RobotContainer {
   // Commands
   
   private final DriveCommand driveCommand = new DriveCommand(driveSubsystem);
-  private final IntakeCommand intakeCommand = new IntakeCommand(intakeSubsystem,0);
   private final ShooterCommand shooterCommand = new ShooterCommand(shooterSubsystem, 0.2);
 
 
@@ -58,7 +57,7 @@ public class RobotContainer {
 
     JoystickButton reachFirstRungButton = new JoystickButton(joy1, Constants.reachFirstRungButton);
     reachFirstRungButton.whenActive(new ReachFirstRungCommand(hangerSubsystem, 0.2));
-    feederServoButton.whenReleased(new IntakeServo(shooterSubsystem, 0));
+    reachFirstRungButton.whenReleased(new ReachFirstRungCommand(hangerSubsystem, 0));
 
     JoystickButton reachSecondRungButton = new JoystickButton(joy1, Constants.reachSecondRungButton);
     reachSecondRungButton.whenActive(new ReachSecondRungCommand(hangerSubsystem, 0.2));

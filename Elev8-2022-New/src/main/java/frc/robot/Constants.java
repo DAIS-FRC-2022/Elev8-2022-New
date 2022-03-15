@@ -26,12 +26,12 @@ public final class Constants {
     public static final int ShooterPort = 3;
     public static final int ServoButtonNum = 6;
 
-    // Hanger ports
+    // Hanger ports - WRONG
     public static final int rightFirstRungPort = 5; // falcon
     public static final int leftFirstRungPort = 6; // falcon
 
-    public static final int rightSecondRungPort = ; // neo
-    public static final int leftSecondRungPort = ; // neo
+    public static final int rightSecondRungPort = 5; // neo
+    public static final int leftSecondRungPort = 6; // neo
 
     public static final int piggyRightPort = 14;
     public static final int piggyLeftPort = 15;

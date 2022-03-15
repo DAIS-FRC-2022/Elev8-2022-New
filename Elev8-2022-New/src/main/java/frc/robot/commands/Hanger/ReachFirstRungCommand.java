@@ -5,7 +5,7 @@ import frc.robot.subsystems.HangerSubsystem;
 
 public class ReachFirstRungCommand extends CommandBase {
     HangerSubsystem hangerSubsystem;
-    double firstRungSpeed;
+    double firstRungSpeed, initEncoderValue;
 
   public ReachFirstRungCommand(HangerSubsystem hangerSubsystem, double firstRungSpeed) {
     this.hangerSubsystem = hangerSubsystem;
@@ -15,12 +15,17 @@ public class ReachFirstRungCommand extends CommandBase {
 
   @Override
   public void initialize() {
-
+    initEncoderValue = hangerSubsystem.getEncoderFirstRung();
   }
 
   @Override
   public void execute() {
-    hangerSubsystem.reachFirstRung(firstRungSpeed);
+    if (firstRungSpeed == 0) {
+      
+    }
+    else {
+      hangerSubsystem.reachFirstRung(firstRungSpeed);
+    }
   }
 
   @Override
